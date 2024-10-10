@@ -10,6 +10,13 @@ import os
 app = FastAPI()
 
 # Configuração do CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite a origem do Next.js
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 model = YOLO("treinamento/best.pt")
