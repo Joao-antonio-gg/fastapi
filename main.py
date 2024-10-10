@@ -10,13 +10,7 @@ import os
 app = FastAPI()
 
 # Configuração do CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Permite a origem do Next.js
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 model = YOLO("treinamento/best.pt")
 
@@ -35,10 +29,6 @@ async def upload_image(file: UploadFile):
         name = result[0].names
         probs = result[0].probs.data.numpy()
         result_f = (name[numpy.argmax(probs)])
-
-        # bloqueios = [FileResponse("img/cadeado.jpg", media_type="image/jpg"), FileResponse("img/chave.jpg", media_type="image/jpg")]
-        # if result_f != 'chave':
-        #     bloqueios.append (FileResponse("img/"+ result_f + ".jpg", media_type="image")) 
         bloqueios = ['cadeado', 'etiqueta']
         if result_f != 'chave':
             bloqueios.append(result_f)
