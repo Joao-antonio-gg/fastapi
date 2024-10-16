@@ -39,10 +39,8 @@ async def upload_image(file: UploadFile):
         bloqueios = ['cadeado', 'etiqueta']
         if result_f != 'chave':
             bloqueios.append(result_f)
-        porcentagem = probs[numpy.argmax(probs)] * 100
-        porcentagem = round(porcentagem, 2)
 
-        return {"result": result_f, "bloqueios": bloqueios, "porcentagem": porcentagem}
+        return {"result": result_f, "bloqueios": bloqueios}
     
 
     except Exception as e:
